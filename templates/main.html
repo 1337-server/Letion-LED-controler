@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}LED changer{% endblock %}
+
+{% block nav %}{{ super() }}{% endblock %}
+
+{% block content %}
+    <style>
+        div.row button {
+            margin: 1rem;
+        }
+    .RED_UP, .RED_DOWN{
+        color:red;
+    }
+    .GREEN_UP, .GREEN_DOWN{
+        color:green;
+    }
+    .BLUE_UP, .BLUE_DOWN{
+        color: blue;
+    }
+    </style>
+    <div class="row" style="height: 30px;"></div>
+    <div class="row ml-0 h-100 w-100 align-items-center">
+        <div class="ml-0 col text-center mx-auto">
+            <div class="card mx-auto">
+                <div class="card-header">
+                    <strong>Preset buttons</strong>
+                </div>
+                <div class="row ml-3 mr-3 align-items-center">
+                    {% for k,v in buttons.items() %}
+                        <button type="button" class="btn btn-primary" data-irsend="{{ k }}"
+                                onclick="goDoSomething(this);">{{ v }}</button>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row" style="height: 30px;"></div>
+    <div class="row ml-0 h-100 w-100 align-items-center">
+        <div class="ml-0 col text-center mx-auto">
+            <div class="card mx-auto">
+                <div class="card-header">
+                    <strong>RGB Controller</strong>
+                </div>
+                <div class="row ml-3 mr-3 align-items-center d-block">
+                    {% for btn in rgb_buttons["up_btns"] %}
+                        {% for k,v in btn.items() %}
+                            <button type="button" class="btn btn-secondary {{ k }}" data-irsend="{{ k }}"
+                                    onclick="goDoSomething(this);"><i class="fas fa-arrow-alt-circle-up"></i></button>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="row ml-3 mr-3 alight-items-center d-block">
+                    {% for btn in rgb_buttons["down_btns"] %}
+                        {% for k,v in btn.items() %}
+                            <button type="button" class="btn btn-secondary {{ k }}" data-irsend="{{ k }}"
+                                    onclick="goDoSomething(this);"><i class="fas fa-arrow-alt-circle-down"></i></button>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        function goDoSomething(identifier) {
+            console.log($(identifier).data('irsend'));
+            //alert("data-irsend:" + $(identifier).data('irsend'));
+            $.post("/api", {func: $(identifier).data('irsend')}, function (data) {
+                console.log(data.success); // John
+            }, "json");
+        }
+
+    </script>
+{% endblock %}
+{% block js %}{{ super() }}{% endblock %}
