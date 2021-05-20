@@ -6,13 +6,13 @@ from subprocess import call
 app = Flask(__name__)
 
 b = {
-    "FLASH": "flash", "FADE": "fade", "CYCLE": "cycle", "CYCLE_ALL": "cycle all", "JUMP": "jump",
+    "FLASH": "Flash White", "JUMP": "Flash", "CYCLE": "Flash 2", "FADE": "fade", "CYCLE_ALL": "cycle all",
     "KEY_F1": "Power", "KEY_F2": "Pause", "KEY_F3": "dimmer", "KEY_F4": "Bightness up",
     "KEY_F5": "White", "KEY_F8": "Red",
     "KEY_F7": "Green", "KEY_F6": "Blue", "KEY_F9": "White", "KEY_F10": "Violet",
     "KEY_F11": "Green", "KEY_F12": "Deep orange", "KEY_F13": "Light Pink",
     "KEY_F14": "Light Purple/Blue", "KEY_F15": "Light Green", "KEY_F16": "Orange",
-    "KEY_F17": "White ish", "KEY_F18": "Purple", "KEY_F19": "Turquoise", "KEY_F20": "Light Lime",
+    "KEY_F17": "Light Aqua", "KEY_F18": "Purple", "KEY_F19": "Turquoise", "KEY_F20": "Light Lime",
     "KEY_F21": "Turquoise", "KEY_F22": "Pink", "KEY_F24": "Yellow", "KEY_F23": "Aqua",
     "BTN_1": "Quicker", "BTN_2": "Slower"
 }
