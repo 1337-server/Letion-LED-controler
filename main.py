@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 b = {
     "FLASH": "flash", "FADE": "fade", "CYCLE": "cycle", "CYCLE_ALL": "cycle all", "JUMP": "jump",
-    "DIY_1": "Custom", "DIY_2": "Custom", "DIY_3": "Custom", "DIY_4": "Custom", "DIY_5": "Custom", "DIY_6": "Custom",
     "KEY_F1": "Power", "KEY_F2": "Pause", "KEY_F3": "dimmer", "KEY_F4": "Bightness up",
     "KEY_F5": "White", "KEY_F8": "Red",
     "KEY_F7": "Green", "KEY_F6": "Blue", "KEY_F9": "White", "KEY_F10": "Violet",
@@ -17,8 +16,13 @@ b = {
     "KEY_F21": "Turquoise", "KEY_F22": "Pink", "KEY_F24": "Yellow", "KEY_F23": "Aqua",
     "BTN_1": "Quicker", "BTN_2": "Slower"
 }
-rgb_buttons = ["RED_UP", "RED_DOWN", "GREEN_UP", "GREEN_DOWN", "BLUE_UP", "BLUE_DOWN"]
-
+custom_btns = {
+    "DIY_1": "Custom 1", "DIY_2": "Custom 2", "DIY_3": "Custom 3",
+    "DIY_4": "Custom 4", "DIY_5": "Custom 6", "DIY_6": "Custom 6"
+}
+# rgb_buttons used to check if the api received a valid button
+rgb_buttons = ["RED_UP", "RED_DOWN", "GREEN_UP", "GREEN_DOWN", "BLUE_UP", "BLUE_DOWN",
+               "DIY_1", "DIY_2", "DIY_3", "DIY_4", "DIY_5", "DIY_6"]
 rgb_buttons2 = {
     "up_btns": [
         {"RED_UP": "Custom Red Up"},
@@ -35,12 +39,11 @@ rgb_buttons2 = {
 
 @app.route('/')
 def hello_world():
-    return render_template('main.html', buttons=b, rgb_buttons=rgb_buttons2)
+    return render_template('main.html', buttons=b, rgb_buttons=rgb_buttons2, diy_buttons=custom_btns)
 
 
 @app.route('/api', methods=['GET', 'POST'])
 def api_main():
-
     button = request.values.get('func') if request.method == 'POST' else request.args.get('func')
     x = {'success': False}
     if button in b or button in rgb_buttons:
